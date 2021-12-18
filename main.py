@@ -28,6 +28,21 @@ class CalculatorWidget(Widget):
         prev_number = prev_number[:-1]
         self.ids.input_box.text = prev_number
 
+    def results(self):
+        prev_number = self.ids.input_box.text
+        try:
+            result = eval(prev_number)
+            self.ids.input_box.text = str(result)
+        except:
+            self.ids.input_box.text = "Wrong equation"
+
+    def positive_negative(self):
+        prev_number = self.ids.input_box.text
+        if "-" in prev_number:
+            self.ids.input_box.text = f"{prev_number.replace('-', '')}"
+        else:
+            self.ids.input_box.text = f"-{prev_number}"
+
 class CalculatorApp(App):
     def build(self):
         return CalculatorWidget()
