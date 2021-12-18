@@ -25,7 +25,10 @@ class CalculatorWidget(Widget):
 
     def remove_last(self):
         prev_number = self.ids.input_box.text
-        prev_number = prev_number[:-1]
+        if prev_number == "":
+            prev_number = '0'
+        else:
+            prev_number = prev_number[:-1]
         self.ids.input_box.text = prev_number
 
     def results(self):
@@ -42,6 +45,14 @@ class CalculatorWidget(Widget):
             self.ids.input_box.text = f"{prev_number.replace('-', '')}"
         else:
             self.ids.input_box.text = f"-{prev_number}"
+
+    def dot(self):
+        prev_number = self.ids.input_box.text
+        if "." in prev_number:
+            pass
+        else:
+            prev_number = f"{prev_number}."
+            self.ids.input_box.text = prev_number
 
 class CalculatorApp(App):
     def build(self):
